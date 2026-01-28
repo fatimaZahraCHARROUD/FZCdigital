@@ -496,7 +496,7 @@ const renderStars = (rating) => {
 
   <Row >
   {services.map((service, index) => (
-    <Col md={6} className="mb-4" key={index} >
+    <Col lg={6} md={12} sm={12} className="mb-4" key={index} >
       <div className="service-cards d-flex bg-dark h-70">
         
         {/* Image container */}
@@ -537,67 +537,54 @@ const renderStars = (rating) => {
 
 {/*why fzc */}
 <section className="why-fzc-section py-5 m-4">
-  <Container>
-    <Row className="align-items-center">
+  <div className="container">
+    <div className="title-why-us">
+      <h2 className="mb-4 text-white" style={{ fontWeight: "bold" }}>
+        Why <span className="text-primary">FZC Digital</span>
+      </h2>
+    </div>
 
-      {/* Left: Floating Image */}
-      <Col lg={5} className="text-center mb-4 mb-lg-0">
+    <div className="why-content">
+      {/* Left: Image */}
+      <div className="why-img-col">
         <img
           src={whyusimg}
           alt="Why FZC Digital"
           className="img-fluid floating-img"
-          style={{ maxWidth: "420px" }}
         />
-      </Col>
+      </div>
 
-      {/* Right: Content */}
-      <Col lg={7}>
-        <h2 className="mb-4 text-white" style={{ fontWeight: "bold" }}>
-          Why <span className="text-primary">FZC Digital</span>
-        </h2>
-
-        <Row className="g-4">
-          <Col md={6}>
-            <div className="service-card p-4 h-100">
-              <h5>We Understand Your Business</h5>
-              <p className="mb-0">
+      {/* Right: Cards */}
+      <div className="why-cards">
+        <div className="service-card">
+          <h5>We Understand Your Business</h5>
+          <p className="mb-0 why-desc">
                 We work with small businesses and professionals, so we know what you really need — simple, effective digital solutions.
               </p>
-            </div>
-          </Col>
-
-          <Col md={6}>
-            <div className="service-card p-4 h-100">
-              <h5>Clear Communication</h5>
-              <p className="mb-0">
+        </div>
+        <div className="service-card">
+          <h5>Clear Communication</h5>
+          <p className="mb-0 why-desc">
                 No technical language. We explain everything clearly and keep you informed at every step.
               </p>
-            </div>
-          </Col>
-
-          <Col md={6}>
-            <div className="service-card p-4 h-100">
-              <h5>Affordable & Honest Pricing</h5>
-              <p className="mb-0">
+        </div>
+        <div className="service-card">
+          <h5>Affordable & Honest Pricing</h5>
+          <p className="mb-0 why-desc">
                 Transparent prices with no surprises. You get exactly what your business needs — nothing more, nothing less.
-              </p>
-            </div>
-          </Col>
-
-          <Col md={6}>
-            <div className="service-card p-4 h-100">
-              <h5>Support After Delivery</h5>
-              <p className="mb-0">
+              </p> 
+        </div>
+        <div className="service-card">
+          <h5>Support After Delivery</h5>
+          <p className="mb-0 why-desc">
                 We don’t disappear after launch. We stay with you to help, update, and support your project.
               </p>
-            </div>
-          </Col>
-        </Row>
-      </Col>
-
-    </Row>
-  </Container>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
+
  
     
 

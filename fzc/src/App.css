@@ -362,8 +362,8 @@ background: linear-gradient(
 
 .service-cards {
   border-radius: 15px;
-   overflow: hidden;
-  max-height: 320px; /* forces same height */
+   overflow: visible;
+  min-height: 320px; /* forces same height */
 }
 
 .service-desc{
@@ -2163,4 +2163,133 @@ img {
 
 #home{
   margin-top: 60px;
+}
+
+/* #services .container{
+   padding : 2px;
+}
+
+.service-cards {
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+} */
+#services .container {
+  max-width: 92%;
+  
+}
+
+
+
+
+
+
+
+
+.service-cards {
+  width: 100%;
+  height:100%;
+  display: flex;
+  flex-direction: row;
+  
+}
+@media (max-width: 991px) {
+  .service-img-wrapper {
+    flex: 0 0 38%;
+    height:100%;
+        display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+    
+
+  .service-content {
+    padding: 1rem;
+  }
+
+  .service-content h3 {
+    font-size: 1.2rem;
+  }
+}
+
+
+@media (max-width: 470px) {
+
+  /* Make card vertical */
+  .service-cards {
+    flex-direction: column;
+  }
+
+  /* Image wrapper takes full width */
+  .service-img-wrapper {
+    width: 100%;
+  }
+
+  /* Image fills the top */
+  .service-img-wrapper img {
+    width: 90%;
+    height: 350px;
+    display: block;
+    object-fit: cover;
+    border-radius: 8px 8px 0 0; /* optional nice look */
+  }
+
+  /* Content below image */
+  .service-content {
+    width: 100%;
+  }
+}
+
+
+
+
+
+.title-why-us{
+  text-align: center;
+}
+
+
+
+
+.why-content {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+/* Image column */
+.why-img-col {
+  flex: 1 1 400px; /* grows, shrinks, minimum 400px */
+  text-align: center;
+}
+
+/* Cards container */
+.why-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  flex: 2 1 400px; /* grows bigger than image */
+}
+
+/* Each card */
+.service-card {
+  flex: 1 1 calc(50% - 20px); /* 2 per row */
+  background: #1f1f3d;
+  color: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  min-width: 200px; /* prevents shrinking too much */
+}
+
+.why-cards div h5{
+  color:#0D6EFD;
+}
+
+@media (min-width: 992px){
+  .title-why-us{
+    margin-bottom:50px;
+  }
 }
