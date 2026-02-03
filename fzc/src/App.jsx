@@ -3,7 +3,7 @@ import { Container, Navbar, Nav, Col, Row, Card, Button, Modal, Tab, Tabs, Badge
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import { FaSun, FaMoon } from "react-icons/fa";
-
+ 
 import { 
   FaBullhorn, FaCheckCircle, FaArrowRight, FaLinkedin, FaGithub, 
   FaEnvelope, FaWhatsapp, FaPlay, FaCode, FaMobileAlt, FaServer, 
@@ -27,8 +27,28 @@ const App = () => {
   const [selectedDemo, setSelectedDemo] = useState(null);
   const [activeTab, setActiveTab] = useState("web");
   const [selectedPlan, setSelectedPlan] = useState("pro");
-const [darkMode, setDarkMode] = useState(false);
+const [lightMode, setLightMode] = useState(false);
 const [activeLink, setActiveLink] = useState("home");
+
+
+useEffect(() => {
+  const savedTheme = localStorage.getItem("theme");
+
+  if (savedTheme === "light") {
+    setLightMode(true);
+    document.body.classList.add("light-theme");
+  }
+}, []);
+
+useEffect(() => {
+  if (lightMode) {
+    document.body.classList.add("light-theme");
+    localStorage.setItem("theme", "light");
+  } else {
+    document.body.classList.remove("light-theme");
+    localStorage.setItem("theme", "dark");
+  }
+}, [lightMode]);
 
   useEffect(() => {
   // ---- Intersection Observer ----
@@ -210,108 +230,7 @@ description: "See how your business is performing at a glance with clear, intera
 
   ];
 
-  const projectDemos = {
-    web: [
-      {
-        id: 1,
-        image:marketing,
-        title: "E-commerce Platform",
-        description: "Full-featured online store with cart, checkout, and admin panel",
-        features: ["Product Catalog", "Shopping Cart", "Payment Gateway", "Order Tracking"]
-      },
-      {
-        id: 2,
-        title: "Real Estate Portal",
-        description: "Property listing platform with advanced search and booking",
-        tech: "Next.js, NestJS, PostgreSQL",
-        videoUrl: "https://example.com/demo2.mp4",
-        liveUrl: "https://demo-fzc-realestate.vercel.app",
-        features: ["Property Search", "Virtual Tours", "Agent CRM", "Booking System"]
-      }
-    ],
-    mobile: [
-      {
-        id: 3,
-        title: "Food Delivery App",
-        description: "Mobile app for food ordering and delivery tracking",
-        tech: "React Native, Node.js, MongoDB",
-        videoUrl: "https://example.com/demo3.mp4",
-        liveUrl: "https://expo.dev/@fzc/food-delivery",
-        features: ["GPS Tracking", "Real-time Updates", "Push Notifications", "Payment Integration"]
-      },
-      {
-        id: 4,
-        title: "Fitness Tracker",
-        description: "Health and fitness tracking application",
-        tech: "Flutter, Firebase, Health APIs",
-        videoUrl: "https://example.com/demo4.mp4",
-        liveUrl: "https://expo.dev/@fzc/fitness-tracker",
-        features: ["Workout Plans", "Progress Tracking", "Social Features", "Health Integration"]
-      }
-    ],
-    fullstack: [
-      {
-        id: 5,
-        title: "Project Management Tool",
-        description: "Collaborative project management platform",
-        tech: "React, Express, Socket.io, MySQL",
-        videoUrl: "https://example.com/demo5.mp4",
-        liveUrl: "https://demo-fzc-pm.vercel.app",
-        features: ["Team Collaboration", "Task Management", "File Sharing", "Real-time Chat"]
-      },
-      {
-        id: 6,
-        title: "Learning Management System",
-        description: "Online education platform with course management",
-        tech: "Vue.js, Laravel, Redis, AWS",
-        videoUrl: "https://example.com/demo6.mp4",
-        liveUrl: "https://demo-fzc-lms.vercel.app",
-        features: ["Course Creation", "Video Streaming", "Quiz System", "Progress Tracking"]
-      }
-    ],
-     dash: [
-      {
-        id: 5,
-        title: "Project Management Tool",
-        description: "Collaborative project management platform",
-        tech: "React, Express, Socket.io, MySQL",
-        videoUrl: "https://example.com/demo5.mp4",
-        liveUrl: "https://demo-fzc-pm.vercel.app",
-        features: ["Team Collaboration", "Task Management", "File Sharing", "Real-time Chat"]
-      },
-      {
-        id: 6,
-        title: "Learning Management System",
-        description: "Online education platform with course management",
-        tech: "Vue.js, Laravel, Redis, AWS",
-        videoUrl: "https://example.com/demo6.mp4",
-        liveUrl: "https://demo-fzc-lms.vercel.app",
-        features: ["Course Creation", "Video Streaming", "Quiz System", "Progress Tracking"]
-      }
-    ],
-     design: [
-      {
-        id: 5,
-        title: "Project Management Tool",
-        description: "Collaborative project management platform",
-        tech: "React, Express, Socket.io, MySQL",
-        videoUrl: "https://example.com/demo5.mp4",
-        liveUrl: "https://demo-fzc-pm.vercel.app",
-        features: ["Team Collaboration", "Task Management", "File Sharing", "Real-time Chat"]
-      },
-      {
-        id: 6,
-        title: "Learning Management System",
-        description: "Online education platform with course management",
-        tech: "Vue.js, Laravel, Redis, AWS",
-        videoUrl: "https://example.com/demo6.mp4",
-        liveUrl: "https://demo-fzc-lms.vercel.app",
-        features: ["Course Creation", "Video Streaming", "Quiz System", "Progress Tracking"]
-      }
-    ],
-
-  };
-
+   
 const clients = [
   {
     name: "TechCorp",
@@ -409,6 +328,14 @@ const renderStars = (rating) => {
   onClick={() => setActiveLink("contact")}
 >
   Get Quote
+</Nav.Link>
+{/* In your Navbar component */}
+<Nav.Link  
+  className="ms-3 theme-toggle"
+  onClick={() => setLightMode(!lightMode)}
+  style={{ cursor: 'pointer' }}
+>
+  {lightMode ? <FaMoon className="text-dark" /> : <FaSun className="text-warning" />}
 </Nav.Link>
 
 </Nav>
