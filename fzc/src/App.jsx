@@ -37,6 +37,7 @@ const App = () => {
   const [selectedPlan, setSelectedPlan] = useState("pro");
   const [lightMode, setLightMode] = useState(false);
   const [activeLink, setActiveLink] = useState("home");
+const isRTL = i18n.language === "ar";
 
    const [currentServiceIndex, setCurrentServiceIndex] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
@@ -373,6 +374,12 @@ const stepIcons = [
     setTouchStart(null);
     setTouchEnd(null);
   };
+
+
+
+  const slideWidth = window.innerWidth <= 660 ? 100 : 60; // mobile = 100%, desktop = 60%
+const peek = window.innerWidth <= 660 ? 0 : 5; // no peek on mobile
+
   return (
     <div>
       <Navbar expand="lg" fixed="top" className={`custom-navbar ${isScrolled ? "navbar-scrolled" : "navbar-transparent"}`}>
@@ -438,8 +445,8 @@ const stepIcons = [
                 <Badge bg="primary" className="me-2">{t('hero.new')}</Badge>
                 {t('hero.tagline')}
               </h6>
-              <h1 className="hero-title mb-4">
-                {t('hero.title')} <span className="text-primary">{t('hero.titleHighlight')}</span>
+              <h1 className="hero-title mb-4" style={{fontSize:isRTL? "5rem" : "", }}>
+                {t('hero.title')}<span className="text-primary">{t('hero.titleHighlight')}</span>
               </h1>
               <p className="hero-desc lead mb-4">{t('hero.description')}</p>
               <div className="hero-stats">
@@ -579,159 +586,169 @@ const stepIcons = [
 
  <br/>        <br/>        <br/>        <br/>        <br/>        <br/>        <br/>        <br/>
 
+
      {/* Services Slider Section */}
-      <section id="services" className="section-py position-relative">
-        <Container>
-          <div className="text-center mb-5 pt-4">
-            <h2 className="section-title display-4 fw-bold mb-3">{t('services.title')}</h2>
-            <p className="section-subtitle lead text-muted mx-auto" style={{ maxWidth: '700px' }}>
-              {t('services.subtitle')}
-            </p>
-          </div>
+    <section id="services" className={`section-py position-relative`}>
+  <Container>
+    <div className="text-center pt-4">
+      <h2 className="section-title display-4 fw-bold mb-3">{t('services.title')}</h2>
+      <p className="section-subtitle lead text-muted mx-auto" style={{ maxWidth: '700px' }}>
+        {t('services.subtitle')}
+      </p>
+    </div>
 
-          {/* Slider container */}
-          <div className="position-relative"
-               onTouchStart={onTouchStart}
-               onTouchMove={onTouchMove}
-               onTouchEnd={onTouchEnd}>
-            
-            {/* Navigation arrows */}
-            <button
-              className="slider-arrow slider-arrow-left position-absolute start-0 top-50 translate-middle-y d-none d-md-flex align-items-center justify-content-center border-0 rounded-circle"
-              onClick={goToPrevious}
-              aria-label="Previous service"
-              style={{
-                width: '50px',
-                height: '50px',
-                backgroundColor: lightMode ? 'white' : '#2d3748',
-                color: lightMode ? '#333' : 'white',
-                boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
-                zIndex: 10,
-                left: '-25px'
-              }}
-            >
-              <FaChevronLeft size={20} />
-            </button>
+    {/* Slider container */}
+   <div
+  className={`position-relative ${lightMode ? "bg-light" : ""}`}
+  style={{ minHeight: "400px" }} // <-- ensures arrows are vertically centered
+  onTouchStart={onTouchStart}
+  onTouchMove={onTouchMove}
+  onTouchEnd={onTouchEnd}
+>
 
-            <button
-              className="slider-arrow slider-arrow-right position-absolute end-0 top-50 translate-middle-y d-none d-md-flex align-items-center justify-content-center border-0 rounded-circle"
-              onClick={goToNext}
-              aria-label="Next service"
-              style={{
-                width: '50px',
-                height: '50px',
-                backgroundColor: lightMode ? 'white' : '#2d3748',
-                color: lightMode ? '#333' : 'white',
-                boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
-                zIndex: 10,
-                right: '-25px'
-              }}
-            >
-              <FaChevronRight size={20} />
-            </button>
+      {/* Navigation arrows */}
+      <button
+   className="slider-arrow slider-arrow-left position-absolute start-0 top-50 translate-middle-y d-flex align-items-center justify-content-center border-0 rounded-circle"
+onClick={isRTL ? goToNext : goToPrevious}
+        aria-label="Previous service"
+        style={{
+          width: '50px',
+          height: '50px',
+          backgroundColor: lightMode ? 'white' : '#2d3748',
+          color: lightMode ? '#333' : 'white',
+          boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
+          zIndex: 10,
+          left: '-25px',
+        }}
+      >
+        <FaChevronLeft size={20} />
+      </button>
 
-            {/* Slider track */}
-            <div className="overflow-hidden">
+      <button
+  className="slider-arrow slider-arrow-right position-absolute end-0 top-50 translate-middle-y d-flex align-items-center justify-content-center border-0 rounded-circle"
+onClick={isRTL ? goToPrevious : goToNext}
+        aria-label="Next service"
+        style={{
+          width: '50px',
+          height: '50px',
+          backgroundColor: lightMode ? 'white' : '#2d3748',
+          color: lightMode ? '#333' : 'white',
+          boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
+          zIndex: 10,
+          right: '-25px',
+        }}
+      >
+        <FaChevronRight size={20} />
+      </button>
+
+      {/* Slider track */}
+      <div className={`overflow-hidden p-2 ${lightMode? "bg-white" :""}`}  > 
+        <div
+          className="d-flex transition-transform"
+          style={{
+              direction: isRTL ? "rtl" : "ltr",
+
+  transform: isRTL
+    ? `translateX(calc(-50% + ${(currentServiceIndex + 0.5) * slideWidth}% + ${peek}%))`
+    : `translateX(calc(50% - ${(currentServiceIndex + 0.5) * slideWidth}% - ${peek}%))`,
+  transition: 'transform 0.5s ease-in-out',
+}}
+
+        >
+          {services.map((service, index) => {
+            const isActive = index === currentServiceIndex;
+            const isAdjacent =
+              index === currentServiceIndex - 1 || index === currentServiceIndex + 1;
+
+            return (
               <div
-                className="d-flex transition-transform"
-                style={{
-                  transform: `translateX(-${currentServiceIndex * 70}%)`
-,
-                  transition: 'transform 0.5s ease-in-out',
-                }}
+                key={index}
+                className={`flex-shrink-0 service-cont service-slide`}
+                style={{ width: '60%' }}
               >
-                {services.map((service, index) => (
-                  <div 
-                    key={index}
-                    className="flex-shrink-0 service-cont "
-                      style={{ width: '70%' }}
-
-                  >
+                <div
+                  className="service-card rounded-4 overflow-hidden shadow-lg"
+                  style={{
+                    transform: isActive ? 'scale(1)' : 'scale(0.88)',
+                    opacity: isActive ? 1 : 0.45,
+                    filter: isActive ? 'none' : 'grayscale(20%)',
+                    transition: 'all 0.5s ease',
+                    zIndex: isActive ? 5 : 1,
+                  }}
+                >
+                  <div style={{ borderRadius: '30px' }} className="service-cards d-flex h-70">
+                    <div className="service-img-wrapper">
+                      <img src={service.img} alt={t(service.title)} />
+                    </div>
                     <div
-                      className={`service-c service-card rounded-4 overflow-hidden shadow-lg `}
+                      className="service-content d-flex flex-column p-3"
                       style={{
-                        height: 'auto',
-                        maxWidth: '80%',
-                        margin: '0 auto',
+                        backgroundColor: isActive
+                          ? lightMode
+                            ? '#f8f9fa'
+                            : '#1f2933'
+                          : lightMode
+                          ? '#f8f9fa'
+                          : '#111827',
+                        transition: 'background-color 0.4s ease',
                       }}
                     >
-                     <div style={{ borderRadius:"15px"}} className="service-cards d-flex h-70 ">
-                  <div className="service-img-wrapper">
-                    <img src={service.img} alt={t(service.title)} />
-                  </div>
-                  <div className={`service-content d-flex flex-column p-3 ${lightMode? "bg-white":""}`} >
-                    <h2 className="text-white">{t(service.title)}</h2>
-                    <p className="service-desc text-white flex-grow-1">{t(service.description)}</p>
-                    <ul className="service-features text-white">
-                      {service.features.map((feature, idx) => (
-                        <li className="service-feautures" key={idx}>
-                          <FaCheckCircle className="text-primary me-2" />
-                          {t(feature)}
-                        </li>
-                      ))}
-                    </ul>
-                    <button className="service-btn btn btn-primary mt-auto">
-                      {t('services.bookNow')}
-                    </button>
+                      <h2 className={lightMode ? 'text-dark' : 'text-white'}>
+                        {t(service.title)}
+                      </h2>
+                      <p className="service-desc flex-grow-1">{t(service.description)}</p>
+                      <ul className="service-features">
+                        {service.features.map((feature, idx) => (
+                          <li className="service-feautures" key={idx}>
+                            <FaCheckCircle className="text-primary me-2" />
+                            {t(feature)}
+                          </li>
+                        ))}
+                      </ul>
+                      <button className="service-btn btn btn-primary mt-auto">
+                        {t('services.bookNow')}
+                      </button>
+                     </div>
                   </div>
                 </div>
-
-                    </div>
-                  </div>
-                ))}
               </div>
-            </div>
-          </div>
+            );
+          })}
+        </div>
+      </div>
+    </div>
 
-          {/* Dots indicator */}
-          <div className="d-flex justify-content-center align-items-center mt-5">
-            <div className="d-flex gap-2">
-              {services.map((_, slideIndex) => (
-                <button
-                  key={slideIndex}
-                  className={`dot-indicator border-0 rounded-circle ${
-                    slideIndex === currentServiceIndex ? 'active' : ''
-                  }`}
-                  onClick={() => goToSlide(slideIndex)}
-                  aria-label={`Go to slide ${slideIndex + 1}`}
-                  style={{
-                    width: slideIndex === currentServiceIndex ? '30px' : '12px',
-                    height: '12px',
-                    backgroundColor:
-                      slideIndex === currentServiceIndex
-                        ? '#0d6efd'
-                        : lightMode
-                        ? '#dee2e6'
-                        : '#495057',
-                    transition: 'all 0.3s ease',
-                  }}
-                />
-              ))}
-            </div>
-          </div>
+    {/* Dots indicator */}
+    <div className="d-flex justify-content-center align-items-center mt-5">
+      <div className="d-flex gap-2">
+        {services.map((_, slideIndex) => (
+          <button
+            key={slideIndex}
+            className={`dot-indicator border-0 rounded-circle ${
+              slideIndex === currentServiceIndex ? 'active' : ''
+            }`}
+            onClick={() => goToSlide(slideIndex)}
+            aria-label={`Go to slide ${slideIndex + 1}`}
+            style={{
+              width: slideIndex === currentServiceIndex ? '30px' : '12px',
+              height: '12px',
+              backgroundColor:
+                slideIndex === currentServiceIndex
+                  ? '#0d6efd'
+                  : lightMode
+                  ? '#dee2e6'
+                  : '#495057',
+              transition: 'all 0.3s ease',
+            }}
+          />
+        ))}
+      </div>
+    </div>
 
-          {/* Mobile navigation buttons */}
-          <div className="d-flex d-md-none justify-content-center align-items-center gap-3 mt-4">
-            <button
-              className="btn btn-outline-primary d-flex align-items-center justify-content-center rounded-circle"
-              onClick={goToPrevious}
-              style={{ width: '50px', height: '50px' }}
-            >
-              <FaChevronLeft />
-            </button>
-            <span className="text-muted">
-              {currentServiceIndex + 1} / {services.length}
-            </span>
-            <button
-              className="btn btn-outline-primary d-flex align-items-center justify-content-center rounded-circle"
-              onClick={goToNext}
-              style={{ width: '50px', height: '50px' }}
-            >
-              <FaChevronRight />
-            </button>
-          </div>
-        </Container>
-      </section>
+    
+  </Container>
+</section>
+
  <br/>        <br/>        <br/>        <br/>        <br/>        <br/>        <br/>        <br/>
 
       <section id="pricing" className="section-py m-4">
