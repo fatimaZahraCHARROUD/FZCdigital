@@ -5,6 +5,7 @@ import "./App.css";
 import { FaSun, FaMoon, FaGlobe } from "react-icons/fa";
  import { FiZap, FiStar, FiShield, FiThumbsUp,FiMic, FiCheckSquare, FiEdit3, FiHome, FiTool, FiHeadphones ,FiTruck, FiSmile, FiBriefcase, FiFileText, FiDollarSign } from 'react-icons/fi';
  import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import emailjs from "@emailjs/browser";
 
 import { 
   FaBullhorn, FaCheckCircle, FaArrowRight, FaLinkedin, FaGithub, 
@@ -380,6 +381,31 @@ const stepIcons = [
   const slideWidth = window.innerWidth <= 660 ? 100 : 60; // mobile = 100%, desktop = 60%
 const peek = window.innerWidth <= 660 ? 0 : 5; // no peek on mobile
 
+
+ const form = useRef();
+
+  const sendEmail = (e) => {
+    e.preventDefault();
+
+    emailjs
+      .sendForm(
+        "service_1ogq2ai",
+        "template_olvm5qv",
+        form.current,
+        "rAfMHgXpi3gwBUYXl"
+      )
+      .then(
+        (result) => {
+          alert("Message sent successfully ✅");
+          form.current.reset();
+        },
+        (error) => {
+          alert("Something went wrong ❌");
+          console.log(error.text);
+        }
+      );
+  };
+
   return (
     <div>
       <Navbar expand="lg" fixed="top" className={`custom-navbar ${isScrolled ? "navbar-scrolled" : "navbar-transparent"}`}>
@@ -404,7 +430,7 @@ const peek = window.innerWidth <= 660 ? 0 : 5; // no peek on mobile
                 {t('navigation.process')}
               </Nav.Link>
               <Nav.Link href="#contact" className={`text-white nav-contact-btn ${activeLink === "contact" ? "activeconc" : ""}`} onClick={() => setActiveLink("contact")}>
-                {t('navigation.quote')}
+                {t('contact.form.title')}
               </Nav.Link>
               
               {/* Language Switcher Dropdown */}
@@ -433,7 +459,7 @@ const peek = window.innerWidth <= 660 ? 0 : 5; // no peek on mobile
         </Container>
       </Navbar>
 
-      <section id="home" className="hero-section ">
+      <section id="home" className="hero-section "><br/>
         <div className="hero-background">
           <div className="hero-overlay"></div>
         </div>
@@ -789,7 +815,7 @@ onClick={isRTL ? goToPrevious : goToNext}
                         </li>
                       ))}
                     </ul>
-                    <Button variant={plan.popular ? "warning" : "primary"} className="w-100 btn" onClick={() => plan.name === "Enterprise" ? window.location.href = "#contact" : setSelectedPlan(plan.name)}>
+                    <Button variant={plan.popular ? "warning" : "primary"} className="w-100 btn" onClick={() => window.location.href = "#contact"}>
                       {t(plan.cta)}
                     </Button>
                   </Card.Body>
@@ -835,7 +861,7 @@ onClick={isRTL ? goToPrevious : goToNext}
               <div className="contact-info">
                 <div className="contact-item mb-3">
                   <FaEnvelope className="me-3" />
-                  <span>contact@fzcdigital.com</span>
+                  <span>FZCdigital.contact@gmail.com</span>
                 </div>
                 <div className="contact-item mb-3">
                   <FaWhatsapp className="me-3" />
@@ -855,16 +881,20 @@ onClick={isRTL ? goToPrevious : goToNext}
               <Card className="contact-form-card">
                 <Card.Body>
                   <h5 className="mb-4">{t('contact.form.title')}</h5>
-                  <form>
+                  <form ref={form} onSubmit={sendEmail}>
                     <div className="mb-3">
-                      <input type="text" className="form-control" placeholder={t('contact.form.name')} />
+                      <input type="text" name="name" className="form-control" placeholder={t('contact.form.name')} />
                     </div>
                     <div className="mb-3">
-                      <input type="email" className="form-control" placeholder={t('contact.form.email')} />
+                      <input type="email" name="email" className="form-control" placeholder={t('contact.form.email')} />
+                    </div>
+                     <div className="mb-3">
+                      <input type="tel" name="nbr" className="form-control" placeholder={t('contact.form.nbr')} />
                     </div>
                     <div className="mb-3">
-                      <select className="form-control">
+                      <select className="form-control" name="service">
                         <option>{t('contact.form.selectService')}</option>
+                        <option>{t('contact.form.services.other')}</option>
                         <option>{t('contact.form.services.web')}</option>
                         <option>{t('contact.form.services.mobile')}</option>
                         <option>{t('contact.form.services.fullstack')}</option>
@@ -872,7 +902,7 @@ onClick={isRTL ? goToPrevious : goToNext}
                       </select>
                     </div>
                     <div className="mb-3">
-                      <textarea className="form-control" rows="4" placeholder={t('contact.form.details')}></textarea>
+                      <textarea name="details" className="form-control" rows="4" placeholder={t('contact.form.details')}></textarea>
                     </div>
                     <Button type="submit" className="btn-primary w-100">
                       {t('contact.form.submit')}

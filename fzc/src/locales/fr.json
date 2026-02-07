@@ -212,17 +212,19 @@
     "title": "Prêt à Démarrer Votre Projet ?",
     "description": "Contactez-nous pour une consultation gratuite et un devis de projet. Discutons de comment nous pouvons aider votre entreprise à grandir.",
     "form": {
-      "title": "Demander un Devis",
+      "title": "Nous Contacter",
       "name": "Votre Nom",
       "email": "Adresse Email",
+      "nbr": "Téléphone",
       "selectService": "Sélectionner un Service",
       "services": {
+        "other":"Demander de l'aide",
         "web": "Développement Web",
         "mobile": "Développement d'Application Mobile",
         "fullstack": "Solution Full-Stack",
         "custom": "Logiciel Personnalisé"
       },
-      "details": "Détails du Projet",
+      "details": "Détails",
       "submit": "Soumettre la Demande"
     }
   },

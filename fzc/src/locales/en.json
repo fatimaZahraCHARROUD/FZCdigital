@@ -212,17 +212,19 @@
     "title": "Ready to Start Your Project?",
     "description": "Contact us for a free consultation and project estimate. Let's discuss how we can help your business grow.",
     "form": {
-      "title": "Request a Quote",
+      "title": "Get in Touch",
       "name": "Your Name",
       "email": "Email Address",
+      "nbr": "Phone Number",
       "selectService": "Select Service",
       "services": {
+        "other": "Ask for Help",
         "web": "Web Development",
         "mobile": "Mobile App Development",
         "fullstack": "Full-Stack Solution",
         "custom": "Custom Software"
       },
-      "details": "Project Details",
+      "details": " Details",
       "submit": "Submit Request"
     }
   },
