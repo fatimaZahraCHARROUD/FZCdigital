@@ -483,19 +483,19 @@ const stepIcons = [
       
       <div className="why-cards d-flex flex-wrap gap-4">
         {[
-          { icon: <FiTruck />, title: "Fast Delivery", desc: "We ensure your products reach you quickly and safely." },
-          { icon: <FiSmile />, title: "Client Satisfaction", desc: "Your happiness is our top priority in every service." },
-          { icon: <FiHeadphones />, title: "Support", desc: "24/7 dedicated support for all your questions and needs." },
-          { icon: <FiBriefcase />, title: "Understand Business", desc: "We tailor our solutions to your specific business requirements." },
-          { icon: <FiFileText />, title: "Clear CMC", desc: "Transparent and clear communication for all contracts and documents." },
-          { icon: <FiDollarSign />, title: "Pricing", desc: "Competitive pricing with no hidden costs." },
-        ].map((item, index) => (
+          { icon: <FiTruck />, titleKey: 'whyUs.reasons.fastDelivery.title', descKey: 'whyUs.reasons.fastDelivery.desc' },
+    { icon: <FiSmile />, titleKey: 'whyUs.reasons.clientSatisfaction.title', descKey: 'whyUs.reasons.clientSatisfaction.desc' },
+    { icon: <FiHeadphones />, titleKey: 'whyUs.reasons.support.title', descKey: 'whyUs.reasons.support.desc' },
+    { icon: <FiBriefcase />, titleKey: 'whyUs.reasons.understandBusiness.title', descKey: 'whyUs.reasons.understandBusiness.desc' },
+    { icon: <FiFileText />, titleKey: 'whyUs.reasons.clearCMC.title', descKey: 'whyUs.reasons.clearCMC.desc' },
+    { icon: <FiDollarSign />, titleKey: 'whyUs.reasons.pricing.title', descKey: 'whyUs.reasons.pricing.desc' },
+    ].map((item, index) => (
           <div className="service-card text-center p-3 shadow-sm rounded" key={index} style={{ flex: "1 1 200px", minWidth: "180px", backgroundColor: "var(--card-bg)" }}>
             <div className="why-icon mb-3" style={{ fontSize: '2.5rem', color: '#0D6EFD' }}>
               {item.icon}
             </div>
-            <h5>{item.title}</h5>
-            <p className="mb-0 why-desc">{item.desc}</p>
+            <h5>{t(item.titleKey)}</h5>
+            <p className="mb-0 why-desc">{t(item.descKey)}</p>
           </div>
         ))}
       </div>

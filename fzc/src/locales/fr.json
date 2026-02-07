@@ -96,22 +96,12 @@
     "titleHighlight": "FZC Digital",
     "imageAlt": "Pourquoi FZC Digital",
     "reasons": {
-      "0": {
-        "title": "Nous Comprenons Votre Entreprise",
-        "description": "Nous travaillons avec les petites entreprises et les professionnels, donc nous savons ce dont vous avez vraiment besoin — des solutions numériques simples et efficaces."
-      },
-      "1": {
-        "title": "Communication Claire",
-        "description": "Pas de langage technique. Nous expliquons tout clairement et vous tenons informé à chaque étape."
-      },
-      "2": {
-        "title": "Tarification Abordable et Honnête",
-        "description": "Des prix transparents sans surprises. Vous obtenez exactement ce dont votre entreprise a besoin — ni plus, ni moins."
-      },
-      "3": {
-        "title": "Support Après Livraison",
-        "description": "Nous ne disparaissons pas après le lancement. Nous restons avec vous pour aider, mettre à jour et supporter votre projet."
-      }
+      "fastDelivery": { "title": "Livraison Rapide", "desc": "Nous garantissons que vos produits arrivent rapidement et en toute sécurité." },
+      "clientSatisfaction": { "title": "Satisfaction Client", "desc": "Votre bonheur est notre priorité dans chaque service." },
+      "support": { "title": "Support", "desc": "Support dédié 24/7 pour toutes vos questions et besoins." },
+      "understandBusiness": { "title": "Comprendre l'entreprise", "desc": "Nous adaptons nos solutions à vos besoins spécifiques." },
+      "clearCMC": { "title": "Communication Claire", "desc": "Communication transparente pour tous les contrats et documents." },
+      "pricing": { "title": "Tarification", "desc": "Prix compétitifs sans coûts cachés." }
     }
   },
   "process": {
